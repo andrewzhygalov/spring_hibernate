@@ -6,14 +6,14 @@ import javax.persistence.*;
 @Table(name = "cars")
 public class Car { 
    @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
    
    private String model;
    
    private Integer series;
    
-   @OneToOne(fetch=FetchType.LAZY)
-   @MapsId
+   @OneToOne(mappedBy = "car")
    private User user;
    
    public Car(String model, Integer series) {
