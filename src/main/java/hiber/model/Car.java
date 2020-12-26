@@ -6,14 +6,15 @@ import javax.persistence.*;
 @Table(name = "cars")
 public class Car { 
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
    
    private String model;
    
    private Integer series;
    
-   @OneToOne(mappedBy = "car")
+   @OneToOne
+   @MapsId
+   @JoinColumn(name="user_id")
    private User user;
    
    public Car(String model, Integer series) {
