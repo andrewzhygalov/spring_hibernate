@@ -19,8 +19,10 @@ public class User {
    @Column(name = "email")
    private String email;
    
-   @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
-   @PrimaryKeyJoinColumn
+   @Embedded
+   @AttributeOverrides({
+	@AttributeOverride(name = "model", column = @Column(name="car_model")),
+	@AttributeOverride(name = "series", column = @Column(name="car_series"))})
    private Car car;
 
    public User() {}
@@ -30,7 +32,6 @@ public class User {
       this.lastName = lastName;
       this.email = email;
 	  this.car = car;
-	  car.setUser(this);
    }
 
    public Long getId() {
@@ -69,7 +70,6 @@ public class User {
    }
 
    public void setCar(Car car) {
-	  car.setUser(this);
       this.car = car;
    }
    

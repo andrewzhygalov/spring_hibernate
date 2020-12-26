@@ -29,11 +29,11 @@ public class UserDaoImp implements UserDao {
    
    @Override
    public List<User> getUsersByCar(String model, int series) {
-	   return listUsers().stream().filter(user -> {
-		   Car car = user.getCar();
-		   return car != null ? car.getModel().equals(model) && car.getSeries() == series
-							  : false;
-	   }).collect(toList());
+	   return sessionFactory.getCurrentSession()
+		.createQuery("select u from User u where u.car.model = :model and u.car.series = :series", User.class)
+		.setParameter("model", model)
+		.setParameter("series", series)
+		.getResultList();
    }
 
 }
