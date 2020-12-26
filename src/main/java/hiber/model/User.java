@@ -19,8 +19,12 @@ public class User {
    @Column(name = "email")
    private String email;
    
-   @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
-   @PrimaryKeyJoinColumn
+   @OneToOne(cascade=CascadeType.ALL)
+   @JoinTable(name = "user_car", 
+	joinColumns = 
+	{@JoinColumn(name = "user_id", referencedColumnName = "id")},
+	inverseJoinColumns = 
+	{@JoinColumn(name = "car_id", referencedColumnName = "id")})
    private Car car;
 
    public User() {}
