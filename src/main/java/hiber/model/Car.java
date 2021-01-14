@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "cars")
 public class Car { 
    @Id
+   @Column(name = "user_id")
    private Long id;
    
    private String model;
